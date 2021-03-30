@@ -1535,7 +1535,7 @@ void FPSciApp::onGraphics2D(RenderDevice* rd, Array<shared_ptr<Surface2D>>& pose
 			// Reticle
 			const shared_ptr<UserConfig> user = currentUser();
 			float tscale = weapon->cooldownRatio(m_lastOnSimulationRealTime, user->reticleChangeTimeS);
-			float rScale = tscale * user->reticleScale[0] + (1.0f - tscale)*user->reticleScale[1];
+			float rScale = tscale * sessConfig->retScale[0] /*user->reticleScale[0]*/ + (1.0f - tscale)*sessConfig->retScale[1]/*user->reticleScale[1]*/;
 			Color4 rColor = user->reticleColor[1] * (1.0f - tscale) + user->reticleColor[0] * tscale;
 			Draw::rect2D(((reticleTexture->rect2DBounds() - reticleTexture->vector2Bounds() / 2.0f))*rScale / 2.0f + rd->viewport().wh() / 2.0f, rd, rColor, reticleTexture);
 

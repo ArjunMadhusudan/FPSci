@@ -33,6 +33,14 @@
 #include "Dialogs.h"
 #include "Weapon.h"
 
+template <class T>
+static bool operator!=(Array<T> a1, Array<T> a2) {
+	for (int i = 0; i < a1.size(); i++) {
+		if (a1[i] != a2[i]) return true;
+	}
+	return false;
+}
+
 TrialCount::TrialCount(const Any& any) {
 	int settingsVersion = 1;
 	AnyTableReader reader(any);
@@ -71,6 +79,7 @@ SessionConfig::SessionConfig(const Any& any) : FpsConfig(any, defaultConfig) {
 		reader.getIfPresent("description", description);
 		reader.getIfPresent("closeOnComplete", closeOnComplete);
 		reader.getIfPresent("blockCount", blockCount);
+		reader.getIfPresent("retScale", retScale);
 		reader.get("trials", trials, format("Issues in the (required) \"trials\" array for session: \"%s\"", id));
 		break;
 	default:
@@ -89,6 +98,7 @@ Any SessionConfig::toAny(const bool forceAll) const {
 	a["description"] = description;
 	if (forceAll || def.closeOnComplete != closeOnComplete)	a["closeOnComplete"] = closeOnComplete;
 	if (forceAll || def.blockCount != blockCount)				a["blockCount"] = blockCount;
+	if (forceAll || def.retScale != retScale)				a["retScale"] = retScale;
 	a["trials"] = trials;
 	return a;
 }

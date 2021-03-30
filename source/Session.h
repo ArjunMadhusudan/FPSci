@@ -126,6 +126,7 @@ public:
 	String				id;								///< Session ID
 	String				description = "Session";		///< String indicating whether session is training or real
 	int					blockCount = 1;					///< Default to just 1 block per session
+	Array<float>		retScale = { 1.0f, 1.0f };	///< Scale for the user's reticle
 	Array<TrialCount>	trials;							///< Array of trials (and their counts) to be performed
 	bool				closeOnComplete = false;		///< Close application on session completed?
 	static FpsConfig	defaultConfig;
